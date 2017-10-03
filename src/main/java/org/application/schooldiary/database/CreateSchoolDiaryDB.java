@@ -1,5 +1,6 @@
 package org.application.schooldiary.database;
 
+import org.application.schooldiary.database.tables.StudentTable;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 
@@ -24,9 +25,9 @@ public class CreateSchoolDiaryDB {
             Class.forName("com.mysql.jdbc.Driver");
 
             //Open a connection
-            System.out.println("Connecting to database...");
-            connection= DriverManager.getConnection(DB_URL, USER, PASS);
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
 
+            // Check weather the database already exist.
             if(checkDBExixt(connection) == false) {
                 //Execute a query
                 System.out.println("Creating database...");
@@ -35,9 +36,12 @@ public class CreateSchoolDiaryDB {
                 String sql = "CREATE DATABASE IF NOT EXISTS SCHOOLDIARYDB";
                 statement.executeUpdate(sql);
                 System.out.println("Database created successfully...");
+
+                StudentTable studentTable = new StudentTable();
+                studentTable.createStudentTable(USER, PASS);
             }
             else {
-                System.out.println("Database already exist");
+                System.out.println("Database already exist!");
             }
 
         }catch(SQLException se){
@@ -75,7 +79,6 @@ public class CreateSchoolDiaryDB {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(flag);
         return flag;
     }
 }
