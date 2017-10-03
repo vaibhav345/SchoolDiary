@@ -41,5 +41,6 @@ dependencies {
 	testCompile('org.springframework.restdocs:spring-restdocs-mockmvc')
 	compile('org.springframework.boot:spring-boot-starter-web','org.apache.tomcat.embed:tomcat-embed-jasper'
 			,'javax.servlet:jstl')
+	compile ('mysql:mysql-connector-java:6.0.+')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
