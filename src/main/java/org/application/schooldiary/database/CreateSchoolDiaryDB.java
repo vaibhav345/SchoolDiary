@@ -1,56 +1,81 @@
 package org.application.schooldiary.database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Primary;
+
+import java.sql.*;
 
 public class CreateSchoolDiaryDB {
     // JDBC driver name and database URL
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/";
+    private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private static final String DB_URL = "jdbc:mysql://localhost/";
 
     //  Database credentials
-    static final String USER = "admin";
-    static final String PASS = "admin";
+    private static final String DBName = "SCHOOLDIARYDB";
+    private static final String USER = "admin";
+    private static final String PASS = "admin";
+
 
     public static void main(String[] args) {
-        Connection conn = null;
-        Statement stmt = null;
+        Connection connection = null;
+        Statement statement= null;
         try{
-            //STEP 2: Register JDBC driver
+            //Register JDBC driver
             Class.forName("com.mysql.jdbc.Driver");
 
-            //STEP 3: Open a connection
+            //Open a connection
             System.out.println("Connecting to database...");
-            conn = DriverManager.getConnection(DB_URL, USER, PASS);
+            connection= DriverManager.getConnection(DB_URL, USER, PASS);
 
-            //STEP 4: Execute a query
-            System.out.println("Creating database...");
-            stmt = conn.createStatement();
+            if(checkDBExixt(connection) == false) {
+                //Execute a query
+                System.out.println("Creating database...");
+                statement = connection.createStatement();
 
-            String sql = "CREATE DATABASE IF NOT EXISTS SCHOOLDIARYDB";
-            stmt.executeUpdate(sql);
-            System.out.println("Database created successfully...");
+                String sql = "CREATE DATABASE IF NOT EXISTS SCHOOLDIARYDB";
+                statement.executeUpdate(sql);
+                System.out.println("Database created successfully...");
+            }
+            else {
+                System.out.println("Database already exist");
+            }
+
         }catch(SQLException se){
-            //Handle errors for JDBC
             se.printStackTrace();
         }catch(Exception e){
-            //Handle errors for Class.forName
             e.printStackTrace();
         }finally{
-            //finally block used to close resources
+            //Close resources
             try{
-                if(stmt!=null)
-                    stmt.close();
-            }catch(SQLException se2){
-            }// nothing we can do
+                if(statement != null)
+                    statement.close();
+            }catch(SQLException se2){ }
             try{
-                if(conn!=null)
-                    conn.close();
+                if(connection != null)
+                    connection.close();
             }catch(SQLException se){
                 se.printStackTrace();
             }
         }
+    }
+
+    public static boolean checkDBExixt(Connection connection) {
+        boolean flag = false;
+
+        try {
+            ResultSet resultSet =  connection.getMetaData().getCatalogs();
+
+            while(resultSet.next()) {
+                String database = resultSet.getString(1);
+                if(database.equalsIgnoreCase(DBName)) {
+                    flag = true;
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(flag);
+        return flag;
     }
 }
