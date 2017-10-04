@@ -13,4 +13,8 @@ public class ControllerClass {
 
         return new ModelAndView("home");
     }
+    @RequestMapping(value = "/register.html")
+    public ModelAndView register() {
+        return new ModelAndView("register");
+    }
 }

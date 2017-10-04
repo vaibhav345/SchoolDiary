@@ -21,7 +21,7 @@ public class StudentTable {
                     + "NAME VARCHAR(40) NOT NULL,"
                     + "USER_NAME VARCHAR(40) NOT NULL,"
                     + "PASSWORD VARCHAR(40) NOT NULL,"
-                    + "EMAIL VARCHAR(40),"
+                    + "EMAIL VARCHAR(40) NOT NULL,"
                     +  "PRIMARY KEY(ID))";
 
             statement.executeUpdate(sql);
