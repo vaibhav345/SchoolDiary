@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class StudentTable {
-    private final  String DB_URL = "jdbc:mysql://localhost/SCHOOLDIARYDB";
+    private final  String DB_URL = "jdbc:mysql://localhost/SCHOOLDIARYDB?useSSL=false";
     private Statement statement;
     private Connection connection;
 
