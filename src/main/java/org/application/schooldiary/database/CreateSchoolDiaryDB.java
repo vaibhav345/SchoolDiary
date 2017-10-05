@@ -9,7 +9,7 @@ import java.sql.*;
 public class CreateSchoolDiaryDB {
     // JDBC driver name and database URL
     private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_URL = "jdbc:mysql://localhost/";
+    private static final String DB_URL = "jdbc:mysql://localhost/?useSSL=false";
 
     //  Database credentials
     private static final String DBName = "SCHOOLDIARYDB";
