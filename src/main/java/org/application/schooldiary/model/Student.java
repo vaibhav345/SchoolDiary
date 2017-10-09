@@ -24,6 +24,8 @@ public class Student implements Serializable{
     @Column(name = "EMAIL", nullable = false)
     private String email;
 
+    public Student() {}
+
     public Student(String name, String user_name, String password, String email) {
         this.name = name;
         this.user_name = user_name;

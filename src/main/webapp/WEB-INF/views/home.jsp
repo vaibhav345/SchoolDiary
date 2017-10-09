@@ -27,7 +27,7 @@
                                 <a href="home" aria-controls="home" role="tab" data-toggle="tab">Student Login</a>
                             </li>
                             <li role="presentation">
-                                <a href="register.html" aria-controls="profile" role="tab" data-toggle="tab">Register</a>
+                                <a onclick="clickRegister()" href="register.html" aria-controls="profile" role="tab" data-toggle="tab">Register</a>
                             </li>
 
                         </ul>
@@ -67,6 +67,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

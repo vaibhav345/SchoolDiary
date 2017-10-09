@@ -2,19 +2,25 @@ package org.application.schooldiary.daoAndServiceImpl.daoImpl;
 
 import org.application.schooldiary.daosAndServices.dao.StudentDao;
 import org.application.schooldiary.model.Student;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Component
 public class StudentDaoImpl extends GenericJpaDao<Student, Integer> implements StudentDao {
+    private static final Logger LOGGER = LoggerFactory.getLogger(StudentDaoImpl.class);
 
-    @PersistenceContext(unitName = "schoolDiaryData")
-    EntityManager entityManager;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     /**
      * Instantiates a new Student dao.
      */
-    protected StudentDaoImpl(Class<Student> clazz) {
+    public StudentDaoImpl() {
         super(Student.class);
     }
 
@@ -36,6 +42,8 @@ public class StudentDaoImpl extends GenericJpaDao<Student, Integer> implements S
 
     @Override
     public void save(Student student) {
+
+        LOGGER.info("In Dao Class");
         persist(student);
     }
 

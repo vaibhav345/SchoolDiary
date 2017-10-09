@@ -4,7 +4,6 @@ import org.application.schooldiary.daosAndServices.dao.GenericDao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.io.Serializable;
 import java.util.Arrays;
@@ -16,9 +15,7 @@ public abstract class GenericJpaDao<T, ID extends Serializable> implements Gener
     /**
      * Instantiates a new Generic jpa dao.
      */
-    protected GenericJpaDao(final Class<T> clazz) {
-        entityClass = clazz;
-    }
+    protected GenericJpaDao(final Class<T> clazz) { entityClass = clazz; }
 
     @Override
     public T findById(ID id) {
@@ -61,44 +58,6 @@ public abstract class GenericJpaDao<T, ID extends Serializable> implements Gener
     public long countAll() {
         final Query query = this.getEntityManager().createQuery("select count(1) from " + entityClass.getSimpleName() + " o");
         return ((Number) query.getSingleResult()).longValue();
-    }
-
-    public T findWithDepth(String idName, Serializable id, String... fetchRelations) {
-        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(entityClass);
-        Root<T> root = criteriaQuery.from(entityClass);
-
-        fetchChild(root, fetchRelations);
-        criteriaQuery.where(criteriaBuilder.equal(root.get(idName), id));
-        return getSingleOrNoneResult(getEntityManager().createQuery(criteriaQuery));
-    }
-
-    public T findWithDepthById(Serializable id, String... fetchRelations) {
-        return findWithDepth("id", id, fetchRelations);
-    }
-
-    /**
-     * Gets single or none result.
-     */
-    private T getSingleOrNoneResult(TypedQuery<T> query) {
-        query.setMaxResults(1);
-        List<T> result = query.getResultList();
-        if (result.isEmpty()) {
-            return null;
-        }
-
-        return result.get(0);
-    }
-
-    public T handleSingleResultQuery(CriteriaQuery<T> criteriaQuery, String format, Object... arguments) {
-        T entity;
-        try {
-            entity = getEntityManager().createQuery(criteriaQuery).getSingleResult();
-        } catch (javax.persistence.NoResultException e) {
-            return null;
-        }
-
-        return entity;
     }
 
     @Override
