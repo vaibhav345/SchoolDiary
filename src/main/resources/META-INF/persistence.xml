@@ -1,8 +1,8 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
 
     <persistence-unit name="schoolDiaryData">
-        <jta-data-source>movieDatabase</jta-data-source>
-        <non-jta-data-source>movieDatabaseUnmanaged</non-jta-data-source>
+        <jta-data-source>schoolDiaryDatabase</jta-data-source>
+        <non-jta-data-source>schoolDiaryDatabaseUnmanaged</non-jta-data-source>
         <class>org.application.schooldiary.model.Student</class>
 
         <properties>
