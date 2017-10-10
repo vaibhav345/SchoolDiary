@@ -31,7 +31,7 @@ public class StudentDaoImpl extends GenericJpaDao<Student, Integer> implements S
 
     @Override
     public List<Student> findAll() {
-        List<Student> results = entityManager.createQuery("select s from STUDENT s order by s.id ASC ", Student.class).getResultList();
+        List<Student> results = entityManager.createQuery("select s from Student s order by s.id ASC ", Student.class).getResultList();
         return results;
     }
 

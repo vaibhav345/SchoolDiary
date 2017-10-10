@@ -2,7 +2,6 @@ package org.application.schooldiary.controller;
 
 import org.application.schooldiary.daosAndServices.service.StudentService;
 import org.application.schooldiary.model.Student;
-import org.hibernate.service.spi.InjectService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
