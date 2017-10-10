@@ -8,9 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SchoolDiaryApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SchoolDiaryApplication.class, args);
-
 		CreateSchoolDiaryDB createSchoolDiaryDB = new CreateSchoolDiaryDB();
 		createSchoolDiaryDB.main(args);
+
+		SpringApplication.run(SchoolDiaryApplication.class, args);
 	}
 }
