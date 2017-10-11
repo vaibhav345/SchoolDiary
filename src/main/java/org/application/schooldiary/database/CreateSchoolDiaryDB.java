@@ -1,8 +1,6 @@
 package org.application.schooldiary.database;
 
 import org.application.schooldiary.database.tables.StudentTable;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
 
 import java.sql.*;
 

@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SchoolDiaryApplication {
 
 	public static void main(String[] args) {
+		/** Crete the schoolDiary Database before running the Application.
+		 */
 		CreateSchoolDiaryDB createSchoolDiaryDB = new CreateSchoolDiaryDB();
 		createSchoolDiaryDB.main(args);
 
