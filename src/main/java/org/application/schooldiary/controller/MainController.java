@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-public class ControllerClass {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ControllerClass.class);
+public class MainController {
+    private static final Logger LOGGER = LoggerFactory.getLogger(MainController.class);
 
     @RequestMapping(value = "/")
     public ModelAndView home() { return new ModelAndView("home"); }
