@@ -4,13 +4,13 @@ import org.application.schooldiary.daosAndServices.dao.StudentDao;
 import org.application.schooldiary.model.Student;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Component
+@Repository
 public class StudentDaoImpl extends GenericJpaDao<Student, Integer> implements StudentDao {
     private static final Logger LOGGER = LoggerFactory.getLogger(StudentDaoImpl.class);
 
