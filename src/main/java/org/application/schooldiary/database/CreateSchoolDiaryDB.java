@@ -1,7 +1,5 @@
 package org.application.schooldiary.database;
 
-import org.application.schooldiary.database.tables.StudentTable;
-
 import java.sql.*;
 
 public class CreateSchoolDiaryDB {
@@ -34,9 +32,6 @@ public class CreateSchoolDiaryDB {
                 String sql = "CREATE DATABASE IF NOT EXISTS SCHOOLDIARYDB";
                 statement.executeUpdate(sql);
                 System.out.println("Database created successfully...");
-
-                //StudentTable studentTable = new StudentTable();
-                //studentTable.createStudentTable(USER, PASS);
             }
             else {
                 System.out.println("Database already exist!");
