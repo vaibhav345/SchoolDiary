@@ -11,9 +11,6 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
 @Configuration
-@EnableWebMvc
-@EnableTransactionManagement
-@ComponentScan("org.application.schooldiary")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Bean

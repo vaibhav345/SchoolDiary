@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class StudentController {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(StudentController.class);
 
-    @Autowired
     private StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @RequestMapping(value = "addStudent.json",  method = RequestMethod.POST)
     public String saveStudent(@RequestBody final Student student) {

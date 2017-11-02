@@ -3,11 +3,12 @@ package org.application.schooldiary.daosAndServices.service;
 import org.application.schooldiary.model.Student;
 
 import java.util.List;
+import java.util.Optional;
 
-public interface StudentService extends GenericService<Student, Integer> {
+public interface StudentService {
     List<Student> findAll();
 
-    Student findById(int id);
+    Optional<Student> findById(int id);
 
     void save(Student student);
 

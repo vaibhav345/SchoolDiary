@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "STUDENT")
 public class Student implements Serializable{
     private static final long serialVersionUID = 1L;
 
@@ -12,16 +11,16 @@ public class Student implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @Column(name = "USER_NAME", nullable = false)
+    @Column(nullable = false)
     private String user_name;
 
-    @Column(name = "PASSWORD", nullable = false)
+    @Column(nullable = false)
     private String password;
 
-    @Column(name = "EMAIL", nullable = false)
+    @Column(nullable = false)
     private String email;
 
     public Student() {}

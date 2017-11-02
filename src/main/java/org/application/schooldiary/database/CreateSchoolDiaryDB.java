@@ -6,7 +6,7 @@ import java.sql.*;
 
 public class CreateSchoolDiaryDB {
     // JDBC driver name and database URL
-    private final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+    private final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DB_URL = "jdbc:mysql://localhost/?useSSL=false";
 
     //  Database credentials
@@ -20,7 +20,7 @@ public class CreateSchoolDiaryDB {
         Statement statement= null;
         try{
             //Register JDBC driver
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             //Open a connection
             connection = DriverManager.getConnection(DB_URL, USER, PASS);
@@ -35,8 +35,8 @@ public class CreateSchoolDiaryDB {
                 statement.executeUpdate(sql);
                 System.out.println("Database created successfully...");
 
-                StudentTable studentTable = new StudentTable();
-                studentTable.createStudentTable(USER, PASS);
+                //StudentTable studentTable = new StudentTable();
+                //studentTable.createStudentTable(USER, PASS);
             }
             else {
                 System.out.println("Database already exist!");

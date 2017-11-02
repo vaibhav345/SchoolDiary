@@ -1,5 +1,4 @@
-package org.application.schooldiary.daoAndServiceImpl.serviceImpl;
-import org.application.schooldiary.daosAndServices.dao.GenericDao;
+package org.application.schooldiary.serviceImple;
 import org.application.schooldiary.daosAndServices.dao.StudentDao;
 import org.application.schooldiary.daosAndServices.service.StudentService;
 import org.application.schooldiary.model.Student;
@@ -8,10 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
-@Service("studentService")
+@Service
 @Transactional
-public class StudentServiceImpl extends GenericServiceImpl<Student, Integer> implements StudentService {
+public class StudentServiceImpl implements StudentService {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(StudentServiceImpl.class);
 
     @Autowired
@@ -23,7 +23,7 @@ public class StudentServiceImpl extends GenericServiceImpl<Student, Integer> imp
     }
 
     @Override
-    public Student findById(int id) {
+    public Optional<Student> findById(int id) {
         return studentDao.findById(id);
     }
 
@@ -36,16 +36,11 @@ public class StudentServiceImpl extends GenericServiceImpl<Student, Integer> imp
 
     @Override
     public void update(Student student) {
-        studentDao.update(student);
+        studentDao.save(student);
     }
 
     @Override
     public void delete(Student student) {
         studentDao.delete(student);
-    }
-
-    @Override
-    protected GenericDao<Student, Integer> getDao() {
-        return studentDao;
     }
 }
