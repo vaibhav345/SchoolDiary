@@ -24,39 +24,37 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="home" aria-controls="home" role="tab" data-toggle="tab">Student Login</a>
+                                <a href="#student" aria-controls="home" role="tab" data-toggle="tab">Student Login</a>
                             </li>
                             <li role="presentation">
-                                <a onclick="clickRegister()" href="register.html" aria-controls="profile" role="tab" data-toggle="tab">Register</a>
+                                <a href="#teacher" aria-controls="profile" role="tab" data-toggle="tab">Teacher Login</a>
                             </li>
 
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="home">
-                                <form action="profile.html">
+                            <div role="tabpanel" class="tab-pane active" id="student">
+                                <form action="studentProfile.html">
                                     <label>Student login</label>
                                     <input type="text" class="form-control" placeholder="Enter Username">
                                     <input type="password" class="form-control" placeholder="Enter your Password">
                                     <button class="btn submit-btn">Submit</button>
-                                    <hr>
-                                    <a href="#" class="pull-right">Forget You Password?</a>
-                                    <input type="checkbox">Remember Password?
-
                                 </form>
+                                <hr>
+                                <a href="#" class="pull-right">Forget You Password?</a>
+                                <a href="register.html">Click Here to Register</a>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="profile">
-                                <form action="profile.html">
+                            <div role="tabpanel" class="tab-pane" id="teacher">
+                                <form action="teacherProfile.html">
                                     <label>Teacher login</label>
                                     <input type="text" class="form-control" placeholder="Enter Username">
                                     <input type="password" class="form-control" placeholder="Enter your Password">
                                     <button class="btn submit-btn">Submit</button>
-                                    <hr>
-                                    <a href="#" class="pull-right">Forget You Password?</a>
-                                    <input type="checkbox">Remember Password?
-
                                 </form>
+                                <hr>
+                                <a href="#" class="pull-right">Forget You Password?</a>
+                                <a href="register.html">Click Here to Register</a>
                             </div>
                         </div>
 
@@ -67,5 +65,7 @@
         </div>
     </div>
 </div>
+<script src="${pageContext.request.contextPath}/resources/js/jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>
