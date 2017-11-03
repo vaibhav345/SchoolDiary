@@ -12,6 +12,11 @@ public class MainController {
     @RequestMapping(value = "/")
     public ModelAndView home() { return new ModelAndView("home"); }
 
+    @RequestMapping(value = "/login.html")
+    public ModelAndView login() {
+        return new ModelAndView("login");
+    }
+
     @RequestMapping(value = "/register.html")
     public ModelAndView register() {
         return new ModelAndView("register");
