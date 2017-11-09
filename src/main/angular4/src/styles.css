@@ -1,0 +1,48 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+  padding: 0px;
+  margin: 0px;
+  font-family: 'Open Sans', sans-serif;
+}
+.select-school{
+  position: relative;
+}
+.school-select {
+  background: rgba(0, 51, 71, 0.7);
+  padding: 20px;
+  margin-top: 20%;
+  border-radius: 5px;
+  border: 7px solid rgb(20, 100, 152);
+}
+.school-select input {
+  box-shadow: none;
+  border: 0px;
+  border-radius: 0px;
+  margin-bottom: 10px;
+}
+.school-select input[type="checkbox"]{
+  margin-right: 10px;
+}
+.school-select form{
+  color: #fff;
+}
+.school-select button{
+  border: 0px;
+  background: #2CC779;
+  color: #fff;
+  border-radius: 0px;
+  margin-bottom: 10px;
+}
+.school-select button:hover{
+  color: #fff;
+}
+.school-select label{
+  color: #fff;
+  text-shadow: none;
+  font-size: 16px;
+}
+.school-select a{
+  color: #fff;
+}
