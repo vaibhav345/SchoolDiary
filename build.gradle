@@ -47,6 +47,10 @@ dependencies {
 	// Needed to handle view resolver for spring boot
 	compile("org.apache.tomcat.embed:tomcat-embed-jasper")
 
+	// https://mvnrepository.com/artifact/org.webjars.bower/angular
+	compile group: 'org.webjars.bower', name: 'angular', version: '1.6.6'
+
+
 	compile("org.webjars:jquery:2.0.3-1")
 	compile (group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.9.1')
 	compile (group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.9.1')
