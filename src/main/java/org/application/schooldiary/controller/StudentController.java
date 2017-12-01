@@ -1,5 +1,6 @@
 package org.application.schooldiary.controller;
 
+import org.application.schooldiary.constant.URI;
 import org.application.schooldiary.daosAndServices.service.StudentService;
 import org.application.schooldiary.model.Student;
 import org.slf4j.LoggerFactory;
@@ -11,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "/students")
+@RequestMapping(value = URI.STUDENTS)
 @CrossOrigin(origins = "http://localhost:4200")
 public class StudentController {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(StudentController.class);
