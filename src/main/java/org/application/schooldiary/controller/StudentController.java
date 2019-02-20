@@ -36,12 +36,11 @@ public class StudentController {
         return student;
     }
 
-    /**
-    @RequestMapping(value = "addStudent.json",  method = RequestMethod.POST)
+    /*@RequestMapping(value = "addStudent.json",  method = RequestMethod.POST)
     public String saveStudent(@RequestBody final Student student) {
         studentService.save(student);
 
         return "{\"msg\":\"hello\"}";
-    }
-    **/
+    }*/
+
 }

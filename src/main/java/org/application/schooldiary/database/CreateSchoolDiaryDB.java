@@ -9,7 +9,7 @@ public class CreateSchoolDiaryDB {
 
     //  Database credentials
     private static final String DBName = "SCHOOLDIARYDB";
-    private static final String USER = "admin";
+    private static final String USER = "root";
     private static final String PASS = "admin";
 
 
