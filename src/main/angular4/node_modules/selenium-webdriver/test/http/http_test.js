@@ -27,7 +27,6 @@ var HttpClient = require('../../http').HttpClient,
     Server = require('../../lib/test/httpserver').Server;
 
 describe('HttpClient', function() {
-  this.timeout(4 * 1000);
 
   var server = new Server(function(req, res) {
     let parsedUrl = url.parse(req.url);
@@ -43,6 +42,14 @@ describe('HttpClient', function() {
     } else if (req.method == 'GET' && req.url == '/hello') {
       res.writeHead(200, {'content-type': 'text/plain'});
       res.end('hello, world!');
+
+    } else if (req.method == 'GET' && req.url == '/chunked') {
+      res.writeHead(200, {
+        'content-type': 'text/html; charset=utf-8',
+        'transfer-encoding': 'chunked'
+      });
+      res.write('<!DOCTYPE html>');
+      setTimeout(() => res.end('<h1>Hello, world!</h1>'), 20);
 
     } else if (req.method == 'GET' && req.url == '/badredirect') {
       res.writeHead(303, {});
@@ -118,6 +125,16 @@ describe('HttpClient', function() {
       assert.equal(request.headers.get('Foo'), 'Bar');
       assert.equal(
           request.headers.get('Accept'), 'application/json; charset=utf-8');
+    });
+  });
+
+  it('handles chunked responses', function() {
+    let request = new HttpRequest('GET', '/chunked');
+
+    let client = new HttpClient(server.url());
+    return client.send(request).then(response => {
+      assert.equal(200, response.status);
+      assert.equal(response.body, '<!DOCTYPE html><h1>Hello, world!</h1>');
     });
   });
 

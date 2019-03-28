@@ -17,7 +17,6 @@
 
 'use strict';
 
-const AdmZip = require('adm-zip');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
@@ -26,9 +25,9 @@ const util = require('util');
 const httpUtil = require('../http/util');
 const io = require('../io');
 const exec = require('../io/exec');
+const {Zip} = require('../io/zip');
 const cmd = require('../lib/command');
 const input = require('../lib/input');
-const promise = require('../lib/promise');
 const webdriver = require('../lib/webdriver');
 const net = require('../net');
 const portprober = require('../net/portprober');
@@ -253,7 +252,7 @@ class DriverService {
 
             httpUtil.waitForServer(serverUrl, timeout, cancelToken)
                 .then(_ => fulfill(serverUrl), err => {
-                  if (err instanceof promise.CancellationError) {
+                  if (err instanceof httpUtil.CancellationError) {
                     fulfill(serverUrl);
                   } else {
                     reject(err);
@@ -278,19 +277,10 @@ class DriverService {
     if (!this.address_ || !this.command_) {
       return Promise.resolve(); // Not currently running.
     }
-    return this.command_.then(function(command) {
-      command.kill('SIGTERM');
-    });
-  }
-
-  /**
-   * Schedules a task in the current control flow to stop the server if it is
-   * currently running.
-   * @return {!promise.Thenable} A promise that will be resolved when
-   *     the server has been stopped.
-   */
-  stop() {
-    return promise.controlFlow().execute(this.kill.bind(this));
+    let cmd = this.command_;
+    this.address_ = null;
+    this.command_ = null;
+    return cmd.then(c => c.kill('SIGTERM'));
   }
 }
 
@@ -492,7 +482,12 @@ class SeleniumServer extends DriverService {
           return jvmArgs.concat('-jar', jar, '-port', port).concat(args);
         });
 
-    super('java', {
+    let java = 'java';
+    if (process.env['JAVA_HOME']) {
+      java = path.join(process.env['JAVA_HOME'], 'bin/java');
+    }
+
+    super(java, {
       loopback: options.loopback,
       port: port,
       args: args,
@@ -523,11 +518,9 @@ class SeleniumServer extends DriverService {
  *
  * @typedef {{
  *   loopback: (boolean|undefined),
- *   port: (number|!promise.Promise<number>),
- *   args: !(Array<string>|promise.Promise<!Array<string>>),
- *   jvmArgs: (!Array<string>|
- *             !promise.Promise<!Array<string>>|
- *             undefined),
+ *   port: (number|!IThenable<number>),
+ *   args: !(Array<string>|IThenable<!Array<string>>),
+ *   jvmArgs: (!Array<string>|!IThenable<!Array<string>>|undefined),
  *   env: (!Object<string, string>|undefined),
  *   stdio: (string|!Array<string|number|!stream.Stream|null|undefined>|
  *           undefined)
@@ -570,15 +563,15 @@ class FileDetector extends input.FileDetector {
         return file;  // Not a valid file, return original input.
       }
 
-      var zip = new AdmZip();
-      zip.addLocalFile(file);
-      // Stored compression, see https://en.wikipedia.org/wiki/Zip_(file_format)
-      zip.getEntries()[0].header.method = 0;
-
-      var command = new cmd.Command(cmd.Name.UPLOAD_FILE)
-          .setParameter('file', zip.toBuffer().toString('base64'));
-      return driver.schedule(command,
-          'remote.FileDetector.handleFile(' + file + ')');
+      let zip = new Zip;
+      return zip.addFile(file)
+          .then(() => zip.toBuffer())
+          .then(buf => buf.toString('base64'))
+          .then(encodedZip => {
+            let command = new cmd.Command(cmd.Name.UPLOAD_FILE)
+                .setParameter('file', encodedZip);
+            return driver.execute(command);
+          });
     }, function(err) {
       if (err.code === 'ENOENT') {
         return file;  // Not a file; return original input.
