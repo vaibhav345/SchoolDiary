@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = URI.STUDENTS)
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:3000")
 public class StudentController {
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(StudentController.class);
 
@@ -31,6 +31,7 @@ public class StudentController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public Student createStudent(@RequestBody Student student) {
+        LOGGER.info("In Register Function: " + student.getUser_name());
         studentService.save(student);
 
         return student;
