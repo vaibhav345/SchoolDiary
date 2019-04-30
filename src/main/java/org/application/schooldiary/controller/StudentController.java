@@ -23,7 +23,6 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<Student> findAll() {
         return studentService.findAll();

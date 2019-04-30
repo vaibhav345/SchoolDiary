@@ -1,9 +1,11 @@
 package org.application.schooldiary.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Teacher {
+public class Teacher implements Serializable {
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
