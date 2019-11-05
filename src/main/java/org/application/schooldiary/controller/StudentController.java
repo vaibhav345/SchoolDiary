@@ -34,7 +34,6 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ResponseBody
     public ResponseEntity createStudent(@RequestBody Student student) {
         LOGGER.info("In Register Function: " + student.getUser_name());
 
